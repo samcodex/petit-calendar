@@ -51,7 +51,6 @@
   box-sizing:border-box;
   font-size: 0.75em;
   text-align:center;
-  background:white;
   cursor:pointer;
   color:black;
   height: 30px;
@@ -99,9 +98,13 @@
 }
 
 .indicator-first {
-  background-color: aquamarine;
+  background-color: green;
 }
 
 .indicator-second {
   background-color: red;
+}
+
+.selected-week {
+  background-color: #efefef;
 }

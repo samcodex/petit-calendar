@@ -20,6 +20,7 @@ export interface Day {
 
 export interface Week {
   days: Day[];
+  isSelected: boolean;
 }
 
 export class Calendar {
@@ -33,7 +34,7 @@ export class Calendar {
     this.locale = locale;
 
     this.firstMomentOfMonth.locale(this.locale);
-    this.setFirstMoment(date);
+    this.change(date, true);
   }
 
   get title() {
@@ -52,29 +53,43 @@ export class Calendar {
   next() {
     this.firstMomentOfMonth.add(1, 'M');
     this.createCalendarWeeks();
+    this.selectFirstWeek();
   }
 
   previous() {
-    this.firstMomentOfMonth.add(-1, 'month');
+    this.firstMomentOfMonth.add(-1, 'M');
     this.createCalendarWeeks();
+    this.selectFirstWeek();
   }
 
-  change(date: moment_.Moment, isSelected = false): Day {
+  change(date: moment_.Moment | Date, isSelected = false): Day {
+    const changedDate = date instanceof Date ? moment(date) : date;
     this.setFirstMoment(date);
+    return isSelected ? this.selectDay(changedDate) : this.findDay(changedDate);
+  }
 
-    let found: Day = null;
-    if (isSelected) {
-      this.weeks.forEach( week => {
-        week.days.forEach(day => {
-          day.isSelected = isSameDate(day.dayMoment, date);
-          if (day.isSelected) {
-            found = day;
-          }
-        });
+  findDay(date: moment_.Moment): Day {
+    let found = null;
+    this.weeks.find( week => {
+        found = week.days.find( day => isSameDate(day.dayMoment, date));
+        return !!found;
+    });
+
+    return found;
+  }
+
+  private selectDay(date: moment_.Moment): Day {
+    let found = null;
+    this.weeks.forEach( week => {
+      week.isSelected = false;
+      week.days.forEach(day => {
+        day.isSelected = isSameDate(day.dayMoment, date);
+        if (day.isSelected) {
+          week.isSelected = true;
+          found = day;
+        }
       });
-    } else {
-      found = this.findDay(date);
-    }
+    });
 
     return found;
   }
@@ -82,11 +97,8 @@ export class Calendar {
   private createCalendarWeeks() {
     this.weeks.length = 0;
 
-    const today = this.today;
     const weeks = this.weeks;
     const firstMoment = this.firstMomentOfMonth.clone();
-
-    const todayDate = today.date();
     const currentMonth = firstMoment.month();
 
     let isNextMonth = false;
@@ -96,7 +108,7 @@ export class Calendar {
         break;
       }
 
-      const week: Week = { days: [] };
+      const week: Week = { days: [], isSelected: false };
       const days: Day[] = week.days;
       weeks.push(week);
 
@@ -118,16 +130,6 @@ export class Calendar {
     }
   }
 
-  findDay(date: moment_.Moment): Day {
-    let found = null;
-    this.weeks.find( week => {
-        found = week.days.find( day => isSameDate(day.dayMoment, date));
-        return !!found;
-    });
-
-    return found;
-  }
-
   private setFirstMoment(date: Date | moment_.Moment = this.firstMomentOfMonth) {
     let year: number, month: number;
     if (date instanceof Date) {
@@ -140,5 +142,9 @@ export class Calendar {
 
     this.firstMomentOfMonth.year(year).month(month).date(1);
     this.createCalendarWeeks();
+  }
+
+  private selectFirstWeek() {
+    this.weeks.forEach((week, index) => week.isSelected = index === 0);
   }
 }

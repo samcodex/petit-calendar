@@ -81,7 +81,7 @@ Properties:
     (calendar: Calendar) => {
       // set day indicators
       calendar.days.forEach(day => {
-        day.indicators.first = ...(condition);  // aquamarine
+        day.indicators.first = ...(condition);  // green
         day.indicators.second = ...(condition); // red
       });
     }
