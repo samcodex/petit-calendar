@@ -1,27 +1,95 @@
-# PetitCalendarApp
+# PetitCalendar
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.7.
+Angular small localization calendar.
 
-## Development server
+<img src="src/assets/calendar.png" width="200">
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Installation
 
-## Code scaffolding
+npm install petit-calendar --save
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+----
+## Usage
+### * Import PetitCalendarModule in the component module
 
-## Build
+```
+  import { PetitCalendarModule } from 'petit-calendar';
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+```
+  imports: [
+    ...
+    PetitCalendarModule
+  ]
+```
 
-## Running unit tests
+### * To use PetitCalendar component
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```
+  <ngp-petit-calendar></ngp-petit-calendar>
+```
 
-## Running end-to-end tests
+Properties:
+```
+  @Input()
+  locale = 'en';
+  // locale code
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+  @Input()
+  viewDate = new Date();
+  // the date to display
 
-## Further help
+  @Input()
+  indicator = false;
+  // true to use indicator
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+  @Output()
+  changeViewDate = new EventEmitter<Date>();
+  // emit the selected date after selecting the date
+
+  @Output()
+  changeViewMonth = new EventEmitter<Date>();
+  // emit the first date of the month when clicking 'previous' or 'next'
+```
+
+### * Use PetitCalendarService to get the current calendar
+
+* import PetitCalendarService
+```
+  import PetitCalendarService from 'petit-calendar';
+
+  ...
+  providers: [
+    ...,
+    PetitCalendarService
+  ]
+```
+
+* inject PetitcalendarService
+```
+  ...
+  constructor(
+    ...,
+    private calendarService: PetitCalendarService
+  ){
+
+  }
+```
+
+* get the current calendar
+```
+  this.calendarService.getCalendar().subscribe(
+    (calendar: Calendar) => {
+      // set day indicators
+      calendar.days.forEach(day => {
+        day.indicators.first = ...(condition);  // aquamarine
+        day.indicators.second = ...(condition); // red
+      });
+    }
+  );
+```
+
+----
+## License
+
+MIT

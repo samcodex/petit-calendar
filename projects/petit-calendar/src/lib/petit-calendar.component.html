@@ -1,0 +1,23 @@
+<div class="petit-calendar">
+	<div class="calendar-header layout-row layout-align-center-center">
+		<span class="month-mover month-prev-mover" (click)="previous()">
+      <img src="{{ chevron_left }}">
+    </span>
+		<span class="month-header">{{ title }}</span>
+		<span class="month-mover month-next-mover" (click)="next()">
+      <img src="{{ chevron_right }}">
+    </span>
+  </div>
+
+	<div class="calendar-week" *ngFor="let week of weeks">
+    <div class="calendar-day" *ngFor="let day of week.days"
+      [ngClass]="getDayCellClass(day)" (click)="select(day)" >
+      {{ day?.date }}
+
+      <div class="day-indicator" *ngIf="indicator && (day.indicators?.first || day.indicators?.second)">
+        <span class="day-dot indicator-first" *ngIf="day.indicators?.first"></span>
+        <span class="day-dot indicator-second" *ngIf="day.indicators?.second"></span>
+      </div>
+    </div>
+  </div>
+</div>

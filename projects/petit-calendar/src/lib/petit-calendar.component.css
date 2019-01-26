@@ -1,0 +1,107 @@
+.petit-calendar {
+  float:left;
+  display:block;
+  box-sizing:border-box;
+  background:white;
+	width:190px;
+	border:solid 1px #CCC;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  color: white;
+  border-bottom: solid 1px #CCC;
+  box-sizing:border-box;
+  vertical-align:middle;
+  background-color: #03a9f4;
+}
+
+.month-mover {
+  float:left;
+  width:30px;
+  font-weight:bold;
+  box-sizing:border-box;
+  padding:0 0px;
+  display: inherit;
+  cursor: pointer;
+}
+
+.month-header {
+  float:left;
+  font-weight:bold;
+  text-transform:uppercase;
+  box-sizing:border-box;
+  text-align:center;
+  color:inherit;
+  display: inherit;
+}
+
+.calendar-week {
+  display: flex;
+  width:100%;
+}
+
+.calendar-day {
+  display: inline-block;
+  flex: 1;
+  box-sizing:border-box;
+  font-size: 0.75em;
+  text-align:center;
+  background:white;
+  cursor:pointer;
+  color:black;
+  height: 30px;
+  line-height: 30px;
+  vertical-align:middle;
+  position: relative;
+}
+
+.day-cell-current {
+  color: black;
+}
+
+.day-cell-not-current {
+  color: lightgray;
+}
+
+.day-cell-weekend {
+  color: lightpink;
+}
+
+.day-cell-today {
+  background-color: #03a9f4;
+  opacity: 0.6;
+  color: white;
+}
+
+.day-cell-selected {
+  background-color: #03a9f4;
+  opacity: 0.3;
+}
+
+.day-indicator {
+  position: absolute;
+  left: 8px;
+  top: 7px;
+}
+
+.day-dot {
+  height: 3px;
+  width: 3px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  margin-left: 2px;
+}
+
+.indicator-first {
+  background-color: aquamarine;
+}
+
+.indicator-second {
+  background-color: red;
+}

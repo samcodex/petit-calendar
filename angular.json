@@ -121,6 +121,41 @@
           }
         }
       }
+    },
+    "petit-calendar": {
+      "root": "projects/petit-calendar",
+      "sourceRoot": "projects/petit-calendar/src",
+      "projectType": "library",
+      "prefix": "ngp",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/petit-calendar/tsconfig.lib.json",
+            "project": "projects/petit-calendar/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/petit-calendar/src/test.ts",
+            "tsConfig": "projects/petit-calendar/tsconfig.spec.json",
+            "karmaConfig": "projects/petit-calendar/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/petit-calendar/tsconfig.lib.json",
+              "projects/petit-calendar/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "petit-calendar-app"
