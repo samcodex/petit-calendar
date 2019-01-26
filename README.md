@@ -8,7 +8,6 @@ Angular small localization calendar.
 
 npm install petit-calendar --save
 
-----
 ## Usage
 ### * Import PetitCalendarModule in the component module
 
@@ -89,7 +88,6 @@ Properties:
   );
 ```
 
-----
 ## License
 
 MIT

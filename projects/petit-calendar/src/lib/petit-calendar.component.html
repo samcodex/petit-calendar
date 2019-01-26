@@ -1,4 +1,4 @@
-<div class="petit-calendar">
+<div class="petit-calendar" *ngIf="!!calendar">
 	<div class="calendar-header layout-row layout-align-center-center">
 		<span class="month-mover month-prev-mover" (click)="previous()">
       <img src="{{ chevron_left }}">
