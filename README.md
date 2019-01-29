@@ -40,7 +40,16 @@ Properties:
 
   @Input()
   indicator = false;
-  // true to use indicator
+  // each day has two event indicators below the day number
+  // true to use event indicators, set the indicators using PetitcalendarService
+
+  @Input()
+  highlightSelectedDate = false;
+  // true to highlight the selected date
+
+  @Input()
+  highlightSelectedWeek = true;
+  // true to highlight the selected week
 
   @Output()
   changeViewDate = new EventEmitter<Date>();
@@ -81,8 +90,8 @@ Properties:
     (calendar: Calendar) => {
       // set day indicators
       calendar.days.forEach(day => {
-        day.indicators.first = ...(condition);  // green
-        day.indicators.second = ...(condition); // red
+        day.indicators.first = (condition);  // green color, indicate the day contains available time slot
+        day.indicators.second = (condition); // red color, indicate the day contains booked time slot
       });
     }
   );

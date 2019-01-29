@@ -19,6 +19,10 @@ export class PetitCalendarComponent implements OnInit {
   viewDate = new Date();
   @Input()
   indicator = false;
+  @Input()
+  highlightSelectedDate = false;
+  @Input()
+  highlightSelectedWeek = true;
 
   @Output()
   changeViewDate = new EventEmitter<Date>();
@@ -52,7 +56,7 @@ export class PetitCalendarComponent implements OnInit {
       cssClass = day.isToday ? 'day-cell-today' : 'day-cell-current';
     }
 
-    if (day.isSelected && !day.isToday) {
+    if (this.highlightSelectedDate && day.isSelected && !day.isToday) {
       cssClass += ' day-cell-selected';
     }
 

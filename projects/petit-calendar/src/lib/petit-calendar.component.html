@@ -9,7 +9,8 @@
     </span>
   </div>
 
-	<div class="calendar-week" [ngClass]="{'selected-week': week.isSelected}" *ngFor="let week of weeks">
+	<div class="calendar-week" [ngClass]="{'selected-week': highlightSelectedWeek && week.isSelected}"
+      *ngFor="let week of weeks">
     <div class="calendar-day" *ngFor="let day of week.days"
       [ngClass]="getDayCellClass(day)" (click)="select(day)" >
       {{ day?.date }}
