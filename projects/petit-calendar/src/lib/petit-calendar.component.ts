@@ -10,9 +10,6 @@ declare var require: any;
   styleUrls: ['petit-calendar.component.css']
 })
 export class PetitCalendarComponent implements OnInit {
-  chevron_left = require('../assets/icons/chevron_left_24px.svg');
-  chevron_right = require('../assets/icons/chevron_right_24px.svg');
-
   @Input()
   locale = 'en';
   @Input()
@@ -23,6 +20,8 @@ export class PetitCalendarComponent implements OnInit {
   highlightSelectedDate = false;
   @Input()
   highlightSelectedWeek = true;
+  @Input()
+  showWeekDayName = true;
 
   @Output()
   changeViewDate = new EventEmitter<Date>();
@@ -30,6 +29,7 @@ export class PetitCalendarComponent implements OnInit {
   changeViewMonth = new EventEmitter<Date>();
 
   calendar: Calendar;
+  weekdays: string[];
 
   constructor(
     private calendarService: PetitCalendarService
@@ -37,6 +37,8 @@ export class PetitCalendarComponent implements OnInit {
 
   ngOnInit() {
     this.calendar = new Calendar(this.locale, this.viewDate);
+    this.weekdays = this.calendar.weekdaysShort.map(day => day.replace('.', ''));
+
     this.calendarService.changeCalendar(this.calendar);
   }
 

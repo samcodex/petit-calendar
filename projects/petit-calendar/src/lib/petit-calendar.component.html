@@ -1,13 +1,19 @@
 <div class="petit-calendar" *ngIf="!!calendar">
 	<div class="calendar-header layout-row layout-align-center-center">
 		<span class="month-mover month-prev-mover" (click)="previous()">
-      <img src="{{ chevron_left }}">
+      <span class="chevron-left"></span>
     </span>
 		<span class="month-header">{{ title }}</span>
 		<span class="month-mover month-next-mover" (click)="next()">
-      <img src="{{ chevron_right }}">
+      <span class="chevron-right"></span>
     </span>
   </div>
+
+  <div class="weekdays-header" *ngIf="showWeekDayName">
+    <span class="weekday-name" *ngFor="let weekday of weekdays">{{ weekday}}</span>
+  </div>
+
+  <div class="divider"></div>
 
 	<div class="calendar-week" [ngClass]="{'selected-week': highlightSelectedWeek && week.isSelected}"
       *ngFor="let week of weeks">

@@ -51,6 +51,10 @@ Properties:
   highlightSelectedWeek = true;
   // true to highlight the selected week
 
+  @Input()
+  showWeekDayName = true;
+  // true to show the name of day of the week
+
   @Output()
   changeViewDate = new EventEmitter<Date>();
   // emit the selected date after selecting the date

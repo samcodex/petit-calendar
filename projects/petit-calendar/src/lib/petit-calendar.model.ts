@@ -50,6 +50,11 @@ export class Calendar {
     return days;
   }
 
+  get weekdaysShort(): string[] {
+    moment.locale(this.locale);
+    return moment.weekdaysShort();
+  }
+
   next() {
     this.firstMomentOfMonth.add(1, 'M');
     this.createCalendarWeeks();
