@@ -1,6 +1,6 @@
 {
   "name": "petit-calendar",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Angular small localization calendar",
   "keywords" :["Angular", "Localization", "Calendar"],
   "license": "MIT",
@@ -8,7 +8,7 @@
     "type": "git",
     "url": "https://github.com/samcodex/petit-calendar.git"
   },
-  "homepage": "",
+  "homepage": "https://github.com/samcodex/petit-calendar/blob/master/README.md",
   "bugs": {
     "url": "https://github.com/samcodex/petit-calendar/issues"
   },
